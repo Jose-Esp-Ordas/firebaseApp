@@ -3,7 +3,6 @@ import {
     collection,
     query,
     onSnapshot,
-    getDocs, 
     addDoc, 
     updateDoc, 
     deleteDoc, 
@@ -69,6 +68,18 @@ export const useFirestore = (collectionName) => {
             return { success: false, error: err.message };
         }
     };
+    // Terminar una tarea  
+    const updateDocument = async (id, state) => {
+        try {
+            const docRef = doc(db, collectionName, id);
+            await updateDoc(docRef, { completed: state });
+            return { success: true };
+        } catch (err) {
+            console.error("Error al actualizar documento: ", err);
+            return { success: false, error: err.message };
+        }
+    };
 
-    return { documents, loading, error, addDocument, deleteDocument };
+    return { documents, loading, error, addDocument, deleteDocument, updateDocument };
+    
 };
