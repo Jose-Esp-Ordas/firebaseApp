@@ -88,9 +88,15 @@ const Tarea = ({ task, updateDocument, deleteDocument }) => {
             <div>Loading...</div>
         ) : (
           <>
-            <span className="text-black bg-amber-400 shadow shadow-amber-700 rounded p-1 mr-4 wrap-break-words inline-block">
-              {task.title}
-            </span>
+            <div>
+              <span className="text-black bg-amber-400 shadow shadow-amber-700 rounded p-1 mr-4 wrap-break-words inline-block">
+                {task.title}
+              </span>
+              <span className="text-sm text-gray-400 mr-4">
+                {/* muestra solo la fecha */}
+                {task.horario ? new Date(task.horario).toLocaleDateString() : "Sin fecha"}
+              </span>
+            </div>
             <div className=''>
               <button 
                 onClick={handleToggle}

@@ -1,11 +1,13 @@
 import { useState,useEffect } from 'react'
 import CreateModal from '../modals/CreateModal';
-
+import { Button } from "@/components/ui/button"
+import DatePicker from './DatePicker';
 const InputForm = ({ add }) => {
     const [taskInput, setTaskInput] = useState("")
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [result, setResult] = useState(null);
-    
+    const [date, setDate] = useState("")
+
     useEffect(() => {    
         let timer = setTimeout(() => {
           setIsModalOpen(false);
@@ -18,6 +20,7 @@ const InputForm = ({ add }) => {
         if (taskInput.trim()) {
             const result = await add({ 
                 title: taskInput,
+                horario: date ? date.toISOString() : null,
                 completed: false
             });
             if (result.success) {
@@ -41,14 +44,17 @@ const InputForm = ({ add }) => {
                 <p>{result}</p>
             </div>
         </CreateModal> 
-        <form onSubmit={handleAddTask} className="mb-4">
+        <form onSubmit={handleAddTask} className="mb-4 justify-center flex-col items-center">
             <textarea 
                 value={taskInput} 
                 onChange={(e) => setTaskInput(e.target.value)} 
                 placeholder="Nueva tarea" 
-                className="border p-2 mr-2 w-full rounded-lg min-h-14 mb-2 bg-indigo-900 text-white"
+                className="border p-2 w-full rounded-lg min-h-14 mb-2 bg-indigo-900 text-white"
             />
-            <button type="submit" className="bg-amber-600 hover:bg-amber-700 text-white p-2">Agregar Tarea</button>
+            <div className='mb-2'>  
+                <DatePicker date={date} setDate={setDate} />
+            </div>
+            <Button variant="default" aria-label="submit" type="submit" size="large">Agregar Tarea</Button>
         </form>
     </>
   )
