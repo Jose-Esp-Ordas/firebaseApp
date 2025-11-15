@@ -96,6 +96,10 @@ const Tarea = ({ task, updateDocument, deleteDocument }) => {
                 {/* muestra solo la fecha */}
                 {task.horario ? new Date(task.horario).toLocaleDateString() : "Sin fecha"}
               </span>
+              <span className="text-sm text-gray-400 mr-4">
+                {/* muestra solo la hora */}
+                {task.hora ? task.hora : ""}
+              </span>
             </div>
             <div className=''>
               <button 

@@ -5,7 +5,7 @@ import { auth } from '../../config/firebase'
 
 const Navbar = () => {
   return (
-    <nav className="navbar bg-gray-800 p-4 flex items-center gap-4">
+    <nav className="navbar bg-gray-800 p-4 flex items-center gap-4 max-h-[15vh]">
         <img src={fuego} alt="Firebase Logo" className="w-20 h-20"/>
         <h1 className=" text-3xl font-bold from-orange-400 to-orange-700 text-transparent bg-clip-text bg-linear-to-r">Lista de tareas en la nube</h1>
         <button

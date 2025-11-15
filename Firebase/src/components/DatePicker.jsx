@@ -7,34 +7,47 @@ import {
 import { Button } from "@/components/ui/button"
 import { Calendar as CalendarIcon } from "lucide-react"
 import { format } from "date-fns"
-import { cn } from "@/lib/utils"
+import { es } from "date-fns/locale"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { useState } from "react"
+import {
+  Field,
+  FieldDescription,
+  FieldGroup,
+  FieldLabel,
+  FieldSet,
+} from "@/components/ui/field"
 
-const DatePicker = ({ date, setDate }) => {
+const DatePicker = ({ date, setDate, hour, setHour }) => {
+  const [open, setOpen] = useState(false)
       
   return (
     <>
-     <Popover>
-      <PopoverTrigger asChild>
-        <Button
-          variant="default"
-          data-empty={!date}
-          className="data-[empty=true]:text-muted-foreground w-[280px] justify-start text-left font-normal"
-        >
-          <CalendarIcon />
-          {date ? format(date, "PPP") : <span>Pick a date</span>}
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-auto p-0">
-        <Calendar mode="single" selected={date} onSelect={(date) => setDate(date)} />
-      </PopoverContent>
-    </Popover>
+    <div className="flex flex-col gap-3">
+       <FieldLabel htmlFor="feedback" className=" text-white">Fecha:</FieldLabel>
+        <Popover open={open} onOpenChange={setOpen}>
+          <PopoverTrigger asChild>
+            <Button
+              variant="default"
+              data-empty={!date}
+              className="data-[empty=true]:text-muted-foreground w-[200px] font-normal h-[7vh] border-white border rounded-4xl"
+            >
+              <CalendarIcon />
+              {date ? format(date, "PPP", { locale: es }) : <span>Elige una fecha</span>}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0  translate-y-1/2" align="start" side="bottom" sideOffset={8}>
+            <Calendar mode="single" selected={date} onSelect={(selectedDate) => { setDate(selectedDate); setOpen(false); }} locale={es} />
+          </PopoverContent>
+        </Popover>
+    </div>
      <div className="flex flex-col gap-3">
+       <FieldLabel htmlFor="feedback" className=" text-white">Hora:</FieldLabel>
         <Input
-        className="w-32 mt-2 bg-black text-gray-700"
+        className="w-32 bg-black text-white h-[7vh]"
           type="time"
-          id="time-picker"
+          value={hour}
+          onChange={(e) => setHour(e.target.value)}
           step="1"
           defaultValue="10:30:00"
         />

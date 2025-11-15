@@ -17,8 +17,8 @@ function App() {
   return (
     <>
       <Navbar />
-      <main className={`p-4 grid grid-cols-1 md:grid-cols-3 gap-4 bg-linear-to-r
-       from-amber-400 to-blue-900 min-h-screen`}>
+      <main className={`p-4 grid grid-cols-1 md:grid-cols-3 gap-8 bg-linear-to-r
+       to-orange-600 from-30% via-orange-900 via-40% from-indigo-950 to-75% max-h-[85vh] min-h-[85vh]`}>
         <InputForm add={addDocument} className="col-span-1" />
         <div className="col-span-1 md:col-span-2">
           {loading && <p>Cargando tareas...</p>}
